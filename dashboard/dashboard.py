@@ -26,7 +26,7 @@ def load_data():
     order_items_ndf = pd.read_csv("./dashboard/order_items_dataset_cleaned.csv")
     
     # Ekstrak file ZIP dan baca dataset di dalamnya
-    with zipfile.ZipFile("geolocation_dataset_cleaned.zip", "r") as zip_ref:
+    with zipfile.ZipFile("./dashboard/geolocation_dataset_cleaned.zip", "r") as zip_ref:
         zip_ref.extractall("dashboard")  # Ekstrak ke folder "extracted_data"
     
     geolocation_ndf = pd.read_csv("./dashboard/geolocation_dataset_cleaned.csv")

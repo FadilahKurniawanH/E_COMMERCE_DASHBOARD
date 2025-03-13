@@ -9,6 +9,7 @@ from folium.plugins import MarkerCluster, HeatMap
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
+import zipfile
 
 # Set page configuration
 st.set_page_config(
@@ -23,7 +24,13 @@ def load_data():
     customers_ndf = pd.read_csv("customers_dataset.csv")
     orders_ndf = pd.read_csv("orders_dataset_cleaned.csv")
     order_items_ndf = pd.read_csv("order_items_dataset_cleaned.csv")
-    geolocation_ndf = pd.read_csv("geolocation_dataset_cleaned.csv")
+    
+    # Ekstrak file ZIP dan baca dataset di dalamnya
+    with zipfile.ZipFile("geolocation_dataset_cleaned.zip", "r") as zip_ref:
+        zip_ref.extractall("dashboard")  # Ekstrak ke folder "extracted_data"
+    
+    geolocation_ndf = pd.read_csv("dashboard/geolocation_dataset_cleaned.csv")
+
     return customers_ndf, orders_ndf, order_items_ndf, geolocation_ndf
 
 # Function to convert date columns
